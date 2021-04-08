@@ -1,0 +1,35 @@
+{
+  "name": "with-typescript-styled-components",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "prepare": "husky install"
+  },
+  "author": "izayl@163.com",
+  "dependencies": {
+    "@geist-ui/react": "^2.1.4",
+    "inter-ui": "^3.18.0",
+    "next": "latest",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
+  },
+  "devDependencies": {
+    "@izayl/eslint-config": "^0.2.1",
+    "@types/node": "12.0.12",
+    "@types/react": "16.8.23",
+    "@types/react-dom": "16.8.4",
+    "eslint": "^7.23.0",
+    "husky": "^6.0.0",
+    "lint-staged": ">=10",
+    "typescript": "4.0"
+  },
+  "license": "MIT",
+  "eslintConfig": {
+    "extends": "@izayl/eslint-config"
+  },
+  "lint-staged": {
+    "*.(js|ts)": "eslint --cache --fix"
+  }
+}
