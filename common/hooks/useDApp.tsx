@@ -9,7 +9,7 @@ export const useDApp = () => {
       setEnable(false)
       const action = {
         name: 'download',
-        handler: () => window.open('tbd'),
+        handler: () => window.open('//token.im/download?index=0'),
       }
       return setToast({
         text: 'Your current browser is not support dapp, trying use imToken or MetaMask',

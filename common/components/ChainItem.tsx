@@ -45,7 +45,7 @@ export const ChainItem: React.FC<IChainItemProps> = ({ chain }) => {
               currentChainId === chain.chainId
                 ? 'current network'
                 : enable && (
-                  <Button auto size="mini" onClick={() => addEthChain(chain)}>
+                  <Button type="secondary" ghost size="mini" onClick={() => addEthChain(chain)}>
                   Add
                   </Button>
                 )
@@ -59,8 +59,8 @@ export const ChainItem: React.FC<IChainItemProps> = ({ chain }) => {
             width: 100%;
           }
 
-          :global(.chain .current) {
-            background: pink;
+          :global(.current .content) {
+            background: antiquewhite;
           }
           :global(.chain-title) {
             display: flex !important;
