@@ -17,3 +17,19 @@ interface Chain {
   faucets: string[]
   infoURL: string
 }
+
+interface AddEthereumChainParameter {
+  /**
+   * the integer ID of the chain as a hexadecimal string
+   */
+  chainId: string
+  blockExplorerUrls?: string[]
+  chainName?: string
+  iconUrls?: string[]
+  nativeCurrency?: {
+    name: string
+    symbol: string
+    decimals: number
+  }
+  rpcUrls?: string[]
+}

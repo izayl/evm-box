@@ -1,0 +1,45 @@
+import { useToasts } from '@geist-ui/react'
+import { utils } from 'ethers'
+import { useEffect, useState } from 'react'
+import { useDApp } from './useDApp'
+
+const { hexValue } = utils
+
+export const useChain = (): [number | undefined, (chain: Chain) => void] => {
+  const enable = useDApp()
+  const [, setToast] = useToasts()
+  const [currentChainId, setCurrentChainId] = useState<Chain['chainId']>()
+
+  useEffect(() => {
+    if (enable) setCurrentChainId(Number(window.ethereum.chainId))
+  })
+
+  const addEthChain = (chain: Chain) => {
+    if (!enable) return
+    const params: AddEthereumChainParameter = {
+      chainId: hexValue(chain.chainId),
+      blockExplorerUrls: [chain.infoURL],
+      chainName: chain.name,
+      nativeCurrency: {
+        name: chain.nativeCurrency.name,
+        symbol: chain.nativeCurrency.symbol,
+        decimals: chain.nativeCurrency.decimals,
+      },
+      rpcUrls: chain.rpc,
+    }
+    window.ethereum.request({
+      method: 'wallet_addEthereumChain',
+      params: [params],
+    }).then(() => {
+      setToast({
+        text: 'add network successfully!',
+      })
+    }).catch((e: Error) => {
+      setToast({
+        text: 'add network failed: ' + e.message,
+      })
+    })
+  }
+
+  return [currentChainId, addEthChain]
+}
