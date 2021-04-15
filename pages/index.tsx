@@ -46,7 +46,8 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
     <div className="chainlist">
       <Page>
         <Page.Header>
-          <h2>Add Network</h2>
+          <h2>EVM Box</h2>
+          <p>Use Your favorite EVM Compatible Network</p>
         </Page.Header>
         <Input width="100%" icon={<Search />} placeholder="Search Network" onChange={onSearch} clearable />
         <Divider />
