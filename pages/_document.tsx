@@ -32,11 +32,11 @@ export default class MyDocument extends Document {
           <meta name="keywords" content="ETH,EVM,EVM Compatible Network,Network,Blockchain,chain" />
           <meta property="og:title" content="EVM Box"/>
           <meta property="og:description" content="use EVM Compatible Network with ease."/>
-          <meta property="og:image" content="/images/favicon.svg"/>
+          <meta property="og:image" content="/images/favicon.png"/>
           <meta property="og:type" content="website" />
-          <link rel="shortcut icon" href="/images/favicon.ico" />
-          <link rel="icon" sizes="16x16 32x32" href="/images/favicon.ico" />
-          <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png"/>
+          <link rel="shortcut icon" href="/images/favicon.png" />
+          <link rel="icon" sizes="16x16 32x32" href="/images/favicon.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png"/>
           <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png"/>
           <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
         </Head>
