@@ -8,7 +8,7 @@ import { Search } from '@geist-ui/react-icons'
 import { GetStaticProps } from 'next'
 import { FormEventHandler, useState } from 'react'
 import debounce from 'lodash/debounce'
-import { ChainItem } from '../common/components/ChainItem'
+import { GithubCorner, ChainItem } from '../common/components'
 
 interface HomeProps {
   chains: Chain[]
@@ -44,6 +44,7 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
 
   return (
     <div className="chainlist">
+      <GithubCorner />
       <Page>
         <Page.Header>
           <h2>EVM Box</h2>
