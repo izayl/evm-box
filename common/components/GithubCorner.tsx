@@ -9,13 +9,16 @@ export const GithubCorner: React.FC = () => {
         </svg>
       </a>
       <style jsx>{`
-        svg {
-          fill:#151513;
-          color:#fff;
-          position: absolute;
+        .github-corner {
+          position: fixed;
           top: 0;
           border: 0;
           right: 0;
+          z-index: 1;
+        }
+        svg {
+          fill:#151513;
+          color:#fff;
         }
         .github-corner:hover .octo-arm{
           animation: octocat-wave 560ms ease-in-out;

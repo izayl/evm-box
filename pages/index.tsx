@@ -44,34 +44,36 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
   }
 
   return (
-    <div className="chainlist">
+    <>
       <GithubCorner />
-      <Page>
-        <Page.Header>
-          <h2>EVM Box</h2>
-          <p>Use Your favorite EVM Compatible Network</p>
-        </Page.Header>
-        <Input
-          width="100%"
-          placeholder="Search Network"
-          icon={<Search />}
-          onFocus={() => setSearchFocused(true)}
-          onBlur={() => setSearchFocused(false)}
-          onChange={onSearch}
-          clearable
-        />
-        {!searchFocused && <SearchRecommend chains={chains} />}
-        <Divider />
+      <div className="chainlist">
+        <Page>
+          <Page.Header>
+            <h2>EVM Box</h2>
+            <p>Use Your favorite EVM Compatible Network</p>
+          </Page.Header>
+          <Input
+            width="100%"
+            placeholder="Search Network"
+            icon={<Search />}
+            onFocus={() => setSearchFocused(true)}
+            onBlur={() => setSearchFocused(false)}
+            onChange={onSearch}
+            clearable
+          />
+          {!searchFocused && <SearchRecommend chains={chains} />}
+          <Divider />
 
-        <Grid.Container gap={2} className="network__container">
-          {filter.map((chain: Chain) => (
-            <Grid sm={12} xs={24} key={chain.chainId}>
-              <ChainItem chain={chain} />
-            </Grid>
-          ))}
-        </Grid.Container>
-      </Page>
-    </div>
+          <Grid.Container gap={2} className="network__container">
+            {filter.map((chain: Chain) => (
+              <Grid sm={12} xs={24} key={chain.chainId}>
+                <ChainItem chain={chain} />
+              </Grid>
+            ))}
+          </Grid.Container>
+        </Page>
+      </div>
+    </>
   )
 }
 
