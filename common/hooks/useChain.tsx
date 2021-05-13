@@ -1,6 +1,7 @@
 import { useToasts } from '@geist-ui/react'
 import { utils } from 'ethers'
 import { useEffect, useState } from 'react'
+import { EVM_BOX_PERSIST } from '../constants'
 import { useDApp } from './useDApp'
 
 const { hexValue } = utils
@@ -34,6 +35,9 @@ export const useChain = (): [number | undefined, (chain: Chain) => void] => {
       setToast({
         text: 'add network successfully!',
       })
+      const prev = window.localStorage.getItem(EVM_BOX_PERSIST)
+      const persist = [chain.chainId, prev].filter(Boolean).join(',')
+      window.localStorage.setItem(EVM_BOX_PERSIST, persist)
     }).catch((e: Error) => {
       setToast({
         text: 'add network failed: ' + e.message,

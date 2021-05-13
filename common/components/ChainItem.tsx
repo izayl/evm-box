@@ -14,7 +14,8 @@ export const ChainItem: React.FC<IChainItemProps> = ({ chain }) => {
     <>
       <Fieldset className={classnames('chain', { current: currentChainId === chain.chainId })}>
         <Fieldset.Title className="chain-title">
-          {chain.nativeCurrency?.symbol ?? ''}
+          {/* {chain.nativeCurrency?.symbol ?? ''} */}
+          {chain.chain}
           <Tag type="lite" className="chain-tag">
             {chain.network}
           </Tag>
