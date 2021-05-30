@@ -1,9 +1,4 @@
-import {
-  Divider,
-  Grid,
-  Page,
-  Input,
-} from '@geist-ui/react'
+import { Divider, Grid, Page, Input } from '@geist-ui/react'
 import { Search } from '@geist-ui/react-icons'
 import { GetStaticProps } from 'next'
 import { FormEventHandler, useState } from 'react'
@@ -18,15 +13,17 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
   const [filter, setFilter] = useState<Chain[]>(chains)
   const [searchFocused, setSearchFocused] = useState(false)
 
-  const searchNetwork: FormEventHandler<HTMLInputElement> = (e) => {
+  const searchNetwork: FormEventHandler<HTMLInputElement> = e => {
     const searchContent = (e.target as HTMLInputElement).value.trim()
     console.log(searchContent, 's')
     if (!searchContent) {
       setFilter(chains)
     } else {
       const searchResult = filter.filter(chain => {
-        const { name, shortName, chain: chainText, network } = chain
-        return [name, shortName, chainText, network].map(item => item.toLowerCase()).some(item => item.indexOf(searchContent.toLowerCase()) > -1)
+        const { name, shortName, chain: chainText, network, networkId } = chain
+        return [name, shortName, chainText, network, networkId.toString()]
+          .map(item => item.toLowerCase())
+          .some(item => item.indexOf(searchContent.toLowerCase()) > -1)
       })
       setFilter(searchResult)
     }
@@ -34,7 +31,7 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
 
   const debouncedSearch = debounce(searchNetwork, 500)
 
-  const onSearch: FormEventHandler<HTMLInputElement> = (e) => {
+  const onSearch: FormEventHandler<HTMLInputElement> = e => {
     if (e.persist) {
       e.persist()
       debouncedSearch(e)
@@ -54,7 +51,7 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
           </Page.Header>
           <Input
             width="100%"
-            placeholder="Search Network"
+            placeholder="Search Network by name, symbol or chainId"
             icon={<Search />}
             onFocus={() => setSearchFocused(true)}
             onBlur={() => setSearchFocused(false)}
@@ -81,9 +78,9 @@ export default Home
 
 export const getStaticProps: GetStaticProps<HomeProps> = async() => {
   try {
-    const chains = await fetch(
-      'https://chainid.network/chains.json',
-    ).then(resp => resp.json())
+    const chains = await fetch('https://chainid.network/chains.json').then(
+      resp => resp.json(),
+    )
 
     return {
       props: {
