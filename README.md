@@ -1,10 +1,10 @@
 # EVM Box
-<img src="https://user-images.githubusercontent.com/10740043/115120259-2f003c00-9fdf-11eb-9cc2-0f9991aa4873.png" width="400" />
 
+<img src="https://user-images.githubusercontent.com/10740043/115120259-2f003c00-9fdf-11eb-9cc2-0f9991aa4873.png" width="400" />
 
 Add & Switch ETH Network as [EIP-3085](https://eips.ethereum.org/EIPS/eip-3085) specified. Tested with [Metamask](https://metamask.io/) & [imToken](https://token.im/download?index=0).
 
-networks info origin from <https://chains.network>
+Search EVM compatible or L2 networks by name, symbol or chainId, networks info maintain by this [open source project](https://github.com/ethereum-lists/chains)
 
 ## Related EIP
 
