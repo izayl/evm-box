@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
+    "release": "standard-version --no-verify",
     "start": "next start",
     "prepare": "husky install"
   },
@@ -28,6 +29,7 @@
     "eslint": "^7.23.0",
     "husky": "^6.0.0",
     "lint-staged": ">=10",
+    "standard-version": "^9.3.0",
     "typescript": "^4.2.4"
   },
   "license": "MIT",
