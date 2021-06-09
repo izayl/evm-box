@@ -12,9 +12,12 @@
   "dependencies": {
     "@geist-ui/react": "^2.1.5",
     "@geist-ui/react-icons": "^1.0.1",
+    "@supabase/supabase-js": "^1.13.2",
     "classnames": "^2.3.1",
+    "date-fns": "^2.22.1",
     "ethers": "^5.1.0",
     "inter-ui": "^3.18.0",
+    "isomorphic-fetch": "^3.0.0",
     "lodash": "^4.17.21",
     "next": "latest",
     "react": "^16.13.0",
@@ -22,6 +25,7 @@
   },
   "devDependencies": {
     "@izayl/eslint-config": "^0.3.0",
+    "@types/isomorphic-fetch": "^0.0.35",
     "@types/lodash": "^4.14.168",
     "@types/node": "12.0.12",
     "@types/react": "^16",
