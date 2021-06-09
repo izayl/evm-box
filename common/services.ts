@@ -1,7 +1,7 @@
-import { format } from 'date-fns'
+import { format, subDays } from 'date-fns'
 import fetch from 'isomorphic-fetch'
-
-const API_PREFIX = process.env.NODE_ENV === 'production' ? 'https://networks.tokenlon.info' : 'http://localhost:3000'
+import { groupBy, reduce, sumBy } from 'lodash'
+import { supabase } from './database/client'
 
 const fetchAPI = async(input: RequestInfo) => {
   try {
@@ -14,6 +14,20 @@ const fetchAPI = async(input: RequestInfo) => {
 
 export const getOriginChains = async() => await fetchAPI('https://chainid.network/chains.json')
 
-export const getNetworkRecords = async() => await fetchAPI(`${API_PREFIX}/api/getDailyRecord?date=${format(new Date(new Date().toUTCString()), 'yyyy-MM-dd')}`).then(resp => resp.data)
+export const getNetworkRecords = async(): Promise<Record<number, number>> => {
+  const date = format(new Date(new Date().toUTCString()), 'yyyy-MM-dd')
 
-export const updateNetworkRecord = async(chainId: number | string) => await fetchAPI(`${API_PREFIX}/api/updateNetworkRecord?chainId=${chainId}`).then(resp => resp.data)
+  const threeDayAge = format(subDays(new Date(date), 3), 'yyyy-MM-dd')
+
+  const { data, error } = await supabase.from('network_select').select('*').gt('date', threeDayAge)
+
+  if (error) return {}
+
+  const group = groupBy(data, 'chain_id')
+
+  const result = reduce(group, (prev, current, key) => ({ ...prev, [key]: sumBy(current, 'count') }), {})
+
+  return result
+}
+
+export const updateNetworkRecord = async(chainId: number | string) => await fetchAPI(`/api/updateNetworkRecord?chainId=${chainId}`).then(resp => resp.data)
