@@ -16,6 +16,7 @@ interface Chain {
   rpc: string[]
   faucets: string[]
   infoURL: string
+  selectCounts?: number
 }
 
 interface AddEthereumChainParameter {

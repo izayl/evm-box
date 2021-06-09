@@ -3,7 +3,9 @@ import { Search } from '@geist-ui/react-icons'
 import { GetStaticProps } from 'next'
 import { FormEventHandler, useState } from 'react'
 import debounce from 'lodash/debounce'
-import { GithubCorner, ChainItem, SearchRecommend } from '../common/components'
+import { orderBy } from 'lodash'
+import { GithubCorner, ChainItem } from '../common/components'
+import { getNetworkRecords, getOriginChains } from '../common/services'
 
 interface HomeProps {
   chains: Chain[]
@@ -11,7 +13,6 @@ interface HomeProps {
 
 export const Home: React.FC<HomeProps> = ({ chains }) => {
   const [filter, setFilter] = useState<Chain[]>(chains)
-  const [searchFocused, setSearchFocused] = useState(false)
 
   const searchNetwork: FormEventHandler<HTMLInputElement> = e => {
     const searchContent = (e.target as HTMLInputElement).value.trim()
@@ -53,12 +54,9 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
             width="100%"
             placeholder="Search Network by name, symbol or chainId"
             icon={<Search />}
-            onFocus={() => setSearchFocused(true)}
-            onBlur={() => setSearchFocused(false)}
             onChange={onSearch}
             clearable
           />
-          {!searchFocused && <SearchRecommend chains={chains} />}
           <Divider />
 
           <Grid.Container gap={2} className="network__container">
@@ -78,16 +76,22 @@ export default Home
 
 export const getStaticProps: GetStaticProps<HomeProps> = async() => {
   try {
-    const chains = await fetch('https://chainid.network/chains.json').then(
-      resp => resp.json(),
-    )
+    const [chains, counts] = await Promise.all([
+      getOriginChains(),
+      getNetworkRecords(),
+    ])
+
+    chains.forEach((chain: Chain) => {
+      if (counts[chain.chainId]) chain.selectCounts = counts[chain.chainId]
+    })
 
     return {
       props: {
-        chains,
+        chains: orderBy(chains, ['selectCounts']),
       },
     }
   } catch (error) {
+    console.error('getStaticProps failed', error)
     return {
       props: {
         chains: [],

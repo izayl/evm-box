@@ -20,9 +20,7 @@ const getDailyRecord = async(
 
   if (error) return res.status(400).json({ data, error })
 
-  console.log({ data })
-
-  const group = groupBy(data, 'network_id')
+  const group = groupBy(data, 'chain_id')
 
   const result = reduce(group, (prev, current, key) => ({ ...prev, [key]: sumBy(current, 'count') }), {})
 
