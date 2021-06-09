@@ -12,7 +12,9 @@
   "dependencies": {
     "@geist-ui/react": "^2.1.5",
     "@geist-ui/react-icons": "^1.0.1",
+    "@supabase/supabase-js": "^1.13.2",
     "classnames": "^2.3.1",
+    "date-fns": "^2.22.1",
     "ethers": "^5.1.0",
     "inter-ui": "^3.18.0",
     "lodash": "^4.17.21",
