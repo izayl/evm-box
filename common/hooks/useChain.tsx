@@ -29,6 +29,11 @@ export const useChain = (): [number | undefined, (chain: Chain) => void] => {
       },
       rpcUrls: chain.rpc,
     }
+    try {
+      updateNetworkRecord(chain.chainId)
+    } catch (error) {
+      //
+    }
     window.ethereum.request({
       method: 'wallet_addEthereumChain',
       params: [params],
@@ -39,7 +44,6 @@ export const useChain = (): [number | undefined, (chain: Chain) => void] => {
       const prev = window.localStorage.getItem(EVM_BOX_PERSIST)
       const persist = [chain.chainId, prev].filter(Boolean).join(',')
       window.localStorage.setItem(EVM_BOX_PERSIST, persist)
-      updateNetworkRecord(chain.chainId)
     }).catch((e: Error) => {
       setToast({
         text: 'add network failed: ' + e.message,
