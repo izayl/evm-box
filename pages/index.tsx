@@ -5,8 +5,12 @@ import { FormEventHandler, useState } from 'react'
 import debounce from 'lodash/debounce'
 import { orderBy } from 'lodash'
 import { GithubCorner, ChainItem } from '../common/components'
-import { getNetworkRecords, getOriginChains } from '../common/services'
-
+import {
+  getNetworkRecords,
+  getOriginChains,
+} from '../common/services'
+import { CUSTOM_NETWORKS } from '../common/custom-networks'
+import { mergeNetworkConfig } from '../common/utils'
 interface HomeProps {
   chains: Chain[]
 }
@@ -76,10 +80,14 @@ export default Home
 
 export const getStaticProps: GetStaticProps<HomeProps> = async() => {
   try {
-    const [chains, counts] = await Promise.all([
+    const [originChains, counts] = await Promise.all([
       getOriginChains(),
       getNetworkRecords(),
     ])
+
+    const chains = mergeNetworkConfig(originChains, CUSTOM_NETWORKS)
+
+    console.log({ chains })
 
     chains.forEach((chain: Chain) => {
       if (counts[chain.chainId]) chain.selectCounts = counts[chain.chainId]

@@ -1,3 +1,6 @@
-export const env = {
-  isDAppBrowser: Boolean(window.ethereum),
+export const mergeNetworkConfig = (
+  initial: Chain[],
+  custom: Array<AtLeastOne<Chain, 'chainId'>>,
+): Chain[] => {
+  return Object.assign(initial, custom)
 }

@@ -6,7 +6,8 @@
     "build": "next build",
     "release": "standard-version --no-verify",
     "start": "next start",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "tsc -p tsconfig.test.json"
   },
   "author": "izayl@163.com",
   "dependencies": {

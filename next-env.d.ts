@@ -12,3 +12,5 @@ declare namespace NodeJS {
     NEXT_PUBLIC_SUPABASE_ANON_KEY: string
   }
 }
+
+type AtLeastOne<T, U extends keyof T> = Partial<T> & Required<Pick<T, U>>
