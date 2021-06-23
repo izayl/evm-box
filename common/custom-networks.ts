@@ -3,10 +3,10 @@
  *
  * means CUSTOM_NETWORKS and default config the same `chainId` will use the CUSTOM one merge into the default one.
  */
-export const CUSTOM_NETWORKS: Array<AtLeastOne<Chain, 'chainId'>> = [
+export const CUSTOM_NETWORKS: Array<AtLeastOne<Chain, 'chainId' | 'name'>> = [
   {
-    name: 'Ethereum Mainnet test',
-    chainId: 1,
-    shortName: 'eth',
+    chainId: 137,
+    name: 'Matic Mainnet',
+    rpc: ['https://matic-mainnet.chainstacklabs.com'],
   },
 ]
