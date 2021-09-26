@@ -92,6 +92,10 @@ export const getStaticProps: GetStaticProps<HomeProps> = async() => {
       props: {
         chains: orderBy(chains, ['selectCounts']),
       },
+      // Next.js will attempt to re-generate the page:
+      // - When a request comes in
+      // - At most once every 10 seconds
+      revalidate: 10,
     }
   } catch (error) {
     console.error('getStaticProps failed', error)
