@@ -17,15 +17,15 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
 
   const searchNetwork: FormEventHandler<HTMLInputElement> = e => {
     const searchContent = (e.target as HTMLInputElement).value.trim()
-    console.log(searchContent, 's')
+
     if (!searchContent) {
       setFilter(chains)
     } else {
-      const searchResult = filter.filter(chain => {
+      const searchResult = chains.filter(chain => {
         const { name, shortName, chain: chainText, network, networkId } = chain
         return [name, shortName, chainText, network, networkId.toString()]
           .map(item => item.toLowerCase())
-          .some(item => item.indexOf(searchContent.toLowerCase()) > -1)
+          .some(item => item.includes(searchContent.toLowerCase()))
       })
       setFilter(searchResult)
     }
