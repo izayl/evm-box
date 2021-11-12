@@ -2,6 +2,7 @@ import { Fieldset, Tag, Row, Col, Button } from '@geist-ui/react'
 import classnames from 'classnames'
 import { useChain } from '../hooks/useChain'
 import { useDApp } from '../hooks/useDApp'
+import { useLocale } from '../hooks/useLocale'
 
 interface IChainItemProps {
   chain: Chain
@@ -10,9 +11,15 @@ interface IChainItemProps {
 export const ChainItem: React.FC<IChainItemProps> = ({ chain }) => {
   const enable = useDApp()
   const [currentChainId, addEthChain] = useChain()
+  const t = useLocale()
+
   return (
     <>
-      <Fieldset className={classnames('chain', { current: currentChainId === chain.chainId })}>
+      <Fieldset
+        className={classnames('chain', {
+          current: currentChainId === chain.chainId,
+        })}
+      >
         <Fieldset.Title className="chain-title">
           {/* {chain.nativeCurrency?.symbol ?? ''} */}
           {chain.chain}
@@ -33,24 +40,23 @@ export const ChainItem: React.FC<IChainItemProps> = ({ chain }) => {
         </Fieldset.Subtitle>
         <Fieldset.Footer>
           <Fieldset.Footer.Status>
-            <a
-              href={chain.infoURL}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-            Official Site
+            <a href={chain.infoURL} target="_blank" rel="noopener noreferrer">
+              {t('OfficialSite')}
             </a>
           </Fieldset.Footer.Status>
           <Fieldset.Footer.Actions>
-            {
-              currentChainId === chain.chainId
-                ? 'current network'
-                : enable && (
-                  <Button type="secondary" ghost size="mini" onClick={() => addEthChain(chain)}>
-                  Add
-                  </Button>
-                )
-            }
+            {currentChainId === chain.chainId
+              ? 'current network'
+              : enable && (
+                <Button
+                  type="secondary"
+                  ghost
+                  size="mini"
+                  onClick={() => addEthChain(chain)}
+                >
+                  {t('Add')}
+                </Button>
+              )}
           </Fieldset.Footer.Actions>
         </Fieldset.Footer>
       </Fieldset>

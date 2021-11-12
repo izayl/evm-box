@@ -8,12 +8,14 @@ import { GithubCorner, ChainItem } from '../common/components'
 import { getNetworkRecords, getOriginChains } from '../common/services'
 import { CUSTOM_NETWORKS } from '../common/custom-networks'
 import { mergeNetworkConfig } from '../common/utils'
+import { useLocale } from '../common/hooks/useLocale'
 interface HomeProps {
   chains: Chain[]
 }
 
 export const Home: React.FC<HomeProps> = ({ chains }) => {
   const [filter, setFilter] = useState<Chain[]>(chains)
+  const t = useLocale()
 
   const searchNetwork: FormEventHandler<HTMLInputElement> = e => {
     const searchContent = (e.target as HTMLInputElement).value.trim()
@@ -48,15 +50,12 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
       <div className="chainlist">
         <Page>
           <Page.Header>
-            <h2>EVM Box</h2>
-            <p>
-              EVM Box is a list of EVM networks. Helping users connect to EVM
-              powered networks.
-            </p>
+            <h2>{t('AppName')}</h2>
+            <p>{t('AppDesc')}</p>
           </Page.Header>
           <Input
             width="100%"
-            placeholder="Search Network by name, symbol or chainId"
+            placeholder={t('SearchPlaceholder')}
             icon={<Search />}
             onChange={onSearch}
             clearable
