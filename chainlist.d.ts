@@ -1,8 +1,14 @@
-
 interface NativeCurrency {
   name: string
   symbol: string
   decimals: number
+}
+
+interface Explorer {
+  name: string
+  url: string
+  icon: string
+  standard: string
 }
 
 interface Chain {
@@ -16,6 +22,7 @@ interface Chain {
   rpc: string[]
   faucets: string[]
   infoURL: string
+  explorers?: Explorer[]
   selectCounts?: number
 }
 
@@ -24,7 +31,7 @@ interface AddEthereumChainParameter {
    * the integer ID of the chain as a hexadecimal string
    */
   chainId: string
-  blockExplorerUrls?: string[]
+  blockExplorerUrls?: string[] | Explorer[]
   chainName?: string
   iconUrls?: string[]
   nativeCurrency?: {
