@@ -23,11 +23,11 @@ export const ChainItem: React.FC<IChainItemProps> = ({ chain }) => {
         <Fieldset.Subtitle>
           <Row>
             <Col>
-              <p>{chain.name}</p>
+              <p style={{ whiteSpace: 'nowrap' }}>{chain.name}</p>
             </Col>
 
             <Col>
-              <p>chainId: {chain.chainId}</p>
+              <p style={{ textAlign: 'right' }}>chainId: {chain.chainId}</p>
             </Col>
           </Row>
         </Fieldset.Subtitle>

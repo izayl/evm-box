@@ -49,7 +49,10 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
         <Page>
           <Page.Header>
             <h2>EVM Box</h2>
-            <p>Use Your favorite EVM Compatible Network</p>
+            <p>
+              EVM Box is a list of EVM networks. Helping users connect to EVM
+              powered networks.
+            </p>
           </Page.Header>
           <Input
             width="100%"
