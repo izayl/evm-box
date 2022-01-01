@@ -26,6 +26,7 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
       const searchResult = chains.filter(chain => {
         const { name, shortName, chain: chainText, network, networkId } = chain
         return [name, shortName, chainText, network, networkId.toString()]
+          .filter(Boolean)
           .map(item => item.toLowerCase())
           .some(item => item.includes(searchContent.toLowerCase()))
       })
