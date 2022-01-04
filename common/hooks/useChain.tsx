@@ -13,7 +13,9 @@ export const useChain = (): [number | undefined, (chain: Chain) => void] => {
   const [currentChainId, setCurrentChainId] = useState<Chain['chainId']>()
 
   useEffect(() => {
-    if (enable) setCurrentChainId(Number(window.ethereum.chainId))
+    if (enable && window.ethereum) {
+      setCurrentChainId(Number(window.ethereum.chainId))
+    }
   })
 
   const addEthChain = (chain: Chain) => {

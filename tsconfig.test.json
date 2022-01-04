@@ -22,5 +22,10 @@
     "noEmitOnError": true
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "chainlist.d.ts", "common/custom-networks.ts"]
+  "include": [
+    "next-env.d.ts",
+    "chainlist.d.ts",
+    "common/types.d.ts",
+    "common/custom-networks.ts"
+  ]
 }
