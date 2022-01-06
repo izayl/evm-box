@@ -12,6 +12,8 @@ export const ChainItem: React.FC<IChainItemProps> = ({ chain }) => {
   const enable = useDApp()
   const [currentChainId, addEthChain] = useChain()
   const t = useLocale()
+  const networkLabel =
+    chain.faucets && chain.faucets.length ? 'Testnet' : 'Mainnet'
 
   return (
     <>
@@ -24,7 +26,7 @@ export const ChainItem: React.FC<IChainItemProps> = ({ chain }) => {
           {/* {chain.nativeCurrency?.symbol ?? ''} */}
           {chain.chain}
           <Tag type="lite" className="chain-tag">
-            {chain.network}
+            {networkLabel}
           </Tag>
         </Fieldset.Title>
         <Fieldset.Subtitle>

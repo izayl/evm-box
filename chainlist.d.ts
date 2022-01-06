@@ -16,6 +16,8 @@ interface Chain {
   chainId: number
   shortName: string
   chain: string
+  // @deprecated check faucet array instead
+  // see issue https://github.com/izayl/evm-box/issues/11
   network: string
   networkId: number
   nativeCurrency: NativeCurrency
