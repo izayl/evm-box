@@ -14,12 +14,12 @@ export default class MyDocument extends Document {
 
     return {
       ...initialProps,
-      styles: (
+      styles: [
         <>
           {initialProps.styles}
           {styles}
-        </>
-      ),
+        </>,
+      ],
     }
   }
 
