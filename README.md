@@ -1,7 +1,7 @@
 # EVM Box
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/10740043/115120259-2f003c00-9fdf-11eb-9cc2-0f9991aa4873.png" width="400" />
+  <img src="https://user-images.githubusercontent.com/10740043/167296346-78a0e82c-468f-425f-b637-e728fad820f4.png" />
 </p>
 
 EVM 网络切换工具 | EVM Box is a list of EVM networks. Helping users connect to EVM powered networks.
@@ -10,13 +10,9 @@ Add & Switch ETH Network as [EIP-3085](https://eips.ethereum.org/EIPS/eip-3085) 
 
 Search EVM compatible or L2 networks by name, symbol or chainId, networks info maintain by this [open source project](https://github.com/ethereum-lists/chains)
 
-## Related EIP
+## EIP Spec
 
 - [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193)
 - [EIP-2696](https://eips.ethereum.org/EIPS/eip-2696)
 - [EIP-3085](https://eips.ethereum.org/EIPS/eip-3085)
-- [EIP-3326](https://ethereum-magicians.org/t/eip-3326-wallet-switchethereumchain/5471) draft in progress.
-
-## Known Issue
-
-[EIP-3085](https://eips.ethereum.org/EIPS/eip-3085) defined `add` method not support mainnet for security reason，so there is no programming methods to switch to mainnet. I'll continue to focus this [EIP-3326](https://ethereum-magicians.org/t/eip-3326-wallet-switchethereumchain/5471) draft, which will resolve this problem.
+- [EIP-3326](https://ethereum-magicians.org/t/eip-3326-wallet-switchethereumchain/5471)
