@@ -1,10 +1,14 @@
 import { Link, Spacer, useTheme } from '@geist-ui/react'
+import { Moon, Sun } from '@geist-ui/react-icons'
 import NextLink from 'next/link'
 import { useLocale } from '../hooks/useLocale'
+import { useThemeSwitch } from '../hooks/useThemeContext'
+import { addColorAlpha } from '../utils'
 
 const Header: React.FC = () => {
   const t = useLocale()
   const theme = useTheme()
+  const { switchTheme, themeType } = useThemeSwitch()
   return (
     <header>
       <div className="header">
@@ -30,13 +34,31 @@ const Header: React.FC = () => {
               </a>
             </Link>
           </NextLink>
+          <Spacer w={3}/>
+          <NextLink href="#">
+            <Link block>
+
+              {themeType === 'dark'
+                ? <Moon
+                  size={18}
+                  onClick={() => switchTheme('light')}
+                  color={theme.palette.foreground}
+                />
+                : <Sun
+                  size={18}
+                  onClick={() => switchTheme('dark')}
+                  color={theme.palette.foreground}
+                />
+              }
+            </Link>
+          </NextLink>
         </nav>
       </div>
       <style jsx>{`
         header {
           backdrop-filter: saturate(180%) blur(5px);
-          background-color: rgba(255, 255, 255, 0.8);
-          box-shadow: 0 0 15px 0 rgb(0 0 0 / 10%);
+          background-color: ${addColorAlpha(theme.palette.background, 0.8)};
+          box-shadow: ${theme.type === 'dark' ? '0 0 0 1px #333' : '0 0 15px 0 rgba(0, 0, 0, 0.1)'};
           width: 100%;
           height: 64px;
           display: flex;
@@ -66,7 +88,7 @@ const Header: React.FC = () => {
         }
 
         nav a {
-          color: #000;
+          color: ${theme.palette.foreground};
           cursor: pointer;
         }
 
