@@ -22,7 +22,7 @@ export const useLocale = () => {
   return t
 }
 
-export const LocaleProvider: React.FC = ({ children }) => {
+export const LocaleProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, setState] = useState<LocaleContextType>({
     locale: 'en',
     langs: { zh, en },
