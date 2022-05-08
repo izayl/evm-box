@@ -3,5 +3,6 @@
   "AppDesc": "使用 EVM 网络切换工具查找你想要切换的 EVM 网络，并切换到对应网络。支持浏览器钱包插件 MetaMask 及 imToken 等手机钱包",
   "SearchPlaceholder": " 输入网络名，代币符号或者 ChainId 来搜索...",
   "OfficialSite": "官方网站",
-  "Add": "添加"
+  "Add": "添加",
+  "Switch": "切换到此网络"
 }

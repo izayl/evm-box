@@ -10,7 +10,7 @@ interface IChainItemProps {
 
 export const ChainItem: React.FC<IChainItemProps> = ({ chain }) => {
   const enable = useDApp()
-  const [currentChainId, addEthChain] = useChain()
+  const [currentChainId, switchEthChain] = useChain()
   const t = useLocale()
   const networkLabel =
     chain.faucets && chain.faucets.length ? 'Testnet' : 'Mainnet'
@@ -54,9 +54,9 @@ export const ChainItem: React.FC<IChainItemProps> = ({ chain }) => {
                   type="secondary"
                   ghost
                   size="mini"
-                  onClick={() => addEthChain(chain)}
+                  onClick={() => switchEthChain(chain)}
                 >
-                  {t('Add')}
+                  {t('Switch')}
                 </Button>
               )}
           </Fieldset.Footer.Actions>

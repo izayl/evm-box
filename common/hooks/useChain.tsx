@@ -18,7 +18,7 @@ export const useChain = (): [number | undefined, (chain: Chain) => void] => {
     }
   })
 
-  const addEthChain = (chain: Chain) => {
+  const switchEthChain = (chain: Chain) => {
     if (!enable) return
 
     const params: AddEthereumChainParameter = {
@@ -42,23 +42,39 @@ export const useChain = (): [number | undefined, (chain: Chain) => void] => {
     }
     window.ethereum
       .request({
-        method: 'wallet_addEthereumChain',
-        params: [params],
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: hexValue(chain.chainId) }],
       })
-      .then(() => {
-        setToast({
-          text: 'add network successfully!',
-        })
-        const prev = window.localStorage.getItem(EVM_BOX_PERSIST)
-        const persist = [chain.chainId, prev].filter(Boolean).join(',')
-        window.localStorage.setItem(EVM_BOX_PERSIST, persist)
-      })
-      .catch((e: Error) => {
-        setToast({
-          text: 'add network failed: ' + e.message,
-        })
-      })
+      .then(
+        () => {
+          setToast({ text: 'network switched success!' })
+        },
+        (error: Error & { code?: string | number }) => {
+          if (Number(error.code) === 4001) {
+            // ignore user cancel
+            return
+          }
+          window.ethereum
+            .request({
+              method: 'wallet_addEthereumChain',
+              params: [params],
+            })
+            .then(() => {
+              setToast({
+                text: 'add network successfully!',
+              })
+              const prev = window.localStorage.getItem(EVM_BOX_PERSIST)
+              const persist = [chain.chainId, prev].filter(Boolean).join(',')
+              window.localStorage.setItem(EVM_BOX_PERSIST, persist)
+            })
+            .catch((e: Error) => {
+              setToast({
+                text: 'add network failed: ' + e.message,
+              })
+            })
+        },
+      )
   }
 
-  return [currentChainId, addEthChain]
+  return [currentChainId, switchEthChain]
 }
