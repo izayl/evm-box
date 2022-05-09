@@ -4,5 +4,7 @@
   "SearchPlaceholder": "Search Network by name, symbol or chainId",
   "OfficialSite": "Official Site",
   "Add": "Add",
-  "Switch": "Switch"
+  "Switch": "Switch",
+  "disconnect": "Disconnect",
+  "CurrentNetwork": "Current Network"
 }

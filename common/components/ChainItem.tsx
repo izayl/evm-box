@@ -43,7 +43,7 @@ export const ChainItem: React.FC<IChainItemProps> = ({ chain }) => {
           </div>
           <div className="actions">
             {currentChainId === chain.chainId
-              ? 'current network'
+              ? t('CurrentNetwork')
               : enable && (
                 <Button
                   type="secondary"

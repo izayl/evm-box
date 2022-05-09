@@ -1,14 +1,62 @@
-import { Link, Spacer, useTheme } from '@geist-ui/react'
+import { Button, ButtonDropdown, Link, Loading, Spacer, useTheme, useToasts } from '@geist-ui/react'
 import { Moon, Sun } from '@geist-ui/react-icons'
 import NextLink from 'next/link'
+import { useEffect } from 'react'
+import { useAccount, useConnect, useDisconnect, useEnsName } from 'wagmi'
+
 import { useLocale } from '../hooks/useLocale'
 import { useThemeSwitch } from '../hooks/useThemeContext'
-import { addColorAlpha } from '../utils'
+import { addColorAlpha, truncateAddress } from '../utils'
+
+const Profile: React.FC = () => {
+  const { data: account } = useAccount()
+  const t = useLocale()
+  const { data: ensName } = useEnsName({ address: account?.address })
+  const { connect, connectors, error, isConnecting, pendingConnector } =
+    useConnect()
+  const { disconnect } = useDisconnect()
+  const [, setToast] = useToasts()
+  const wc = connectors?.find(connector => connector.name === 'WalletConnect')
+
+  useEffect(() => {
+    if (error) {
+      setToast({ type: 'error', text: error.message })
+    }
+  }, [error])
+
+  if (account) {
+    return (
+      <ButtonDropdown type="secondary" scale={0.5}>
+        <ButtonDropdown.Item main>{ensName || truncateAddress(account.address)}</ButtonDropdown.Item>
+        <ButtonDropdown.Item onClick={() => disconnect()} type="secondary">{t('disconnect')}</ButtonDropdown.Item>
+      </ButtonDropdown>
+    )
+  }
+
+  if (!wc) return null
+
+  return (
+    <Button
+      auto
+      disabled={!wc.ready}
+      type="secondary-light"
+      onClick={() => connect(wc)}
+      scale={0.5}
+    >
+      {wc.name}
+      {!wc.ready && ' (unsupported)'}
+      {isConnecting &&
+            wc.id === pendingConnector?.id &&
+            <Loading />}
+    </Button>
+  )
+}
 
 const Header: React.FC = () => {
   const t = useLocale()
   const theme = useTheme()
   const { switchTheme, themeType } = useThemeSwitch()
+
   return (
     <header>
       <div className="header">
@@ -52,6 +100,8 @@ const Header: React.FC = () => {
               }
             </Link>
           </NextLink>
+          <Spacer w={3} />
+          <Profile />
         </nav>
       </div>
       <style jsx>{`

@@ -4,12 +4,14 @@ import { GetStaticProps } from 'next'
 import { FormEventHandler, useState } from 'react'
 import debounce from 'lodash/debounce'
 import { orderBy } from 'lodash'
+import { Provider } from 'wagmi'
 import { ChainItem } from '../common/components'
 import { getNetworkRecords, getOriginChains } from '../common/services'
 import { CUSTOM_NETWORKS } from '../common/custom-networks'
 import { mergeNetworkConfig } from '../common/utils'
 import { useLocale } from '../common/hooks/useLocale'
 import Header from '../common/components/Header'
+import { client } from '../common/connectors/client'
 interface HomeProps {
   chains: Chain[]
 }
@@ -48,7 +50,7 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
   }
 
   return (
-    <>
+    <Provider client={client}>
       <Header />
       <div className="layout">
         <main>
@@ -93,7 +95,7 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
           }
         }
       `}</style>
-    </>
+    </Provider>
   )
 }
 
