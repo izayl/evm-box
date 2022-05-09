@@ -16,15 +16,17 @@
     "@supabase/supabase-js": "^1.13.2",
     "classnames": "^2.3.1",
     "date-fns": "^2.22.1",
-    "ethers": "^5.1.0",
+    "ethers": "^5.6.5",
     "inter-ui": "^3.18.0",
     "isomorphic-fetch": "^3.0.0",
     "lodash": "^4.17.21",
     "next": "latest",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "wagmi": "^0.3.4"
   },
   "devDependencies": {
+    "@babel/core": "7",
     "@izayl/eslint-config": "^0.3.0",
     "@types/isomorphic-fetch": "^0.0.35",
     "@types/lodash": "^4.14.168",

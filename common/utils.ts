@@ -46,3 +46,21 @@ export const addColorAlpha = (color: string, alpha: number) => {
   const safeAlpha = alpha > 1 ? 1 : alpha < 0 ? 0 : alpha
   return `rgba(${r}, ${g}, ${b}, ${safeAlpha})`
 }
+
+/**
+ * ETH Address Truncate
+ * @param address string ETH Address
+ * @param reserve number truncate reserve on both left and right
+ *
+ * @example
+ * const addr = '0xd8da6bf26964af9d7eed9e03e53415d37aa96045'
+ * const truncatedAddr = truncateAddress(addr)
+ * // 0xd8da...6045
+ */
+export const truncateAddress = (address: string | undefined, reserve = 4): string => {
+  if (!address) return ''
+  const left = address.substring(0, 2 + reserve)
+  const right = address.substring(address.length - reserve)
+
+  return `${left}...${right}`
+}
