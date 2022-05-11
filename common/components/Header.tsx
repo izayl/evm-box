@@ -144,7 +144,7 @@ const Header: React.FC = () => {
         }
 
         :global(.header .link) {
-          color: ${theme.palette.foreground};
+          color: ${theme.palette.foreground} !important;
         }
 
         .logo {
