@@ -61,12 +61,6 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
           `,
             }}
           />
-          <style>{`
-            * {
-              transition: all 0.02s linear;
-            }
-            `}
-          </style>
           <Component {...pageProps} />
         </GeistProvider>
       </ThemeProvider>
