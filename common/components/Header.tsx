@@ -67,40 +67,41 @@ const Header: React.FC = () => {
           </div>
         </NextLink>
         <nav>
-          <NextLink href="https://faucet.paradigm.xyz/">
-            <Link block>
-              <a target="_blank" rel="noopener noreferrer">
-              Faucet
-              </a>
-            </Link>
-          </NextLink>
-          <Spacer w={3}/>
-          <NextLink href="https://github.com/izayl/evm-box">
-            <Link block>
-              <a target="_blank" rel="noopener noreferrer">
-              Github
-              </a>
-            </Link>
-          </NextLink>
-          <Spacer w={3}/>
-          <NextLink href="#">
-            <Link block>
-
-              {themeType === 'dark'
-                ? <Moon
-                  size={18}
-                  onClick={() => switchTheme('light')}
-                  color={theme.palette.foreground}
-                />
-                : <Sun
-                  size={18}
-                  onClick={() => switchTheme('dark')}
-                  color={theme.palette.foreground}
-                />
-              }
-            </Link>
-          </NextLink>
-          <Spacer w={3} />
+          <Link
+            href="https://faucet.paradigm.xyz/"
+            target="_blank"
+            rel="noopener noreferrer"
+            color={false}
+            block
+          >
+            Faucet
+          </Link>
+          <Spacer w={2}/>
+          <Link
+            href="https://github.com/izayl/evm-box"
+            target="_blank"
+            rel="noopener noreferrer"
+            color={false}
+            block
+          >
+            GitHub
+          </Link>
+          <Spacer w={2}/>
+          <Link block href="#">
+            {themeType === 'dark'
+              ? <Moon
+                size={18}
+                onClick={() => switchTheme('light')}
+                color={theme.palette.foreground}
+              />
+              : <Sun
+                size={18}
+                onClick={() => switchTheme('dark')}
+                color={theme.palette.foreground}
+              />
+            }
+          </Link>
+          <Spacer w={2} />
           <Profile />
         </nav>
       </div>
@@ -140,6 +141,10 @@ const Header: React.FC = () => {
         nav a {
           color: ${theme.palette.foreground};
           cursor: pointer;
+        }
+
+        :global(.header .link) {
+          color: ${theme.palette.foreground};
         }
 
         .logo {
