@@ -1,7 +1,7 @@
 import { Divider, Grid, Input, useTheme } from '@geist-ui/react'
 import { Search } from '@geist-ui/react-icons'
 import { GetStaticProps } from 'next'
-import { FormEventHandler, useState } from 'react'
+import { FormEventHandler, useEffect, useState } from 'react'
 import debounce from 'lodash/debounce'
 import { orderBy } from 'lodash'
 import { Provider } from 'wagmi'
@@ -20,6 +20,13 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
   const theme = useTheme()
   const [filter, setFilter] = useState<Chain[]>(chains)
   const t = useLocale()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
 
   const searchNetwork: FormEventHandler<HTMLInputElement> = e => {
     const searchContent = (e.target as HTMLInputElement).value.trim()
