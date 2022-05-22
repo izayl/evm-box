@@ -1,21 +1,33 @@
-import { Divider, Grid, Page, Input } from '@geist-ui/react'
+import { Divider, Grid, Input, useTheme } from '@geist-ui/react'
 import { Search } from '@geist-ui/react-icons'
 import { GetStaticProps } from 'next'
-import { FormEventHandler, useState } from 'react'
+import { FormEventHandler, useEffect, useState } from 'react'
 import debounce from 'lodash/debounce'
 import { orderBy } from 'lodash'
-import { GithubCorner, ChainItem } from '../common/components'
+import { Provider } from 'wagmi'
+import { ChainItem } from '../common/components'
 import { getNetworkRecords, getOriginChains } from '../common/services'
 import { CUSTOM_NETWORKS } from '../common/custom-networks'
 import { mergeNetworkConfig } from '../common/utils'
 import { useLocale } from '../common/hooks/useLocale'
+import Header from '../common/components/Header'
+import { client } from '../common/connectors/client'
+import BackToTop from '../common/components/BackToTop'
 interface HomeProps {
   chains: Chain[]
 }
 
 export const Home: React.FC<HomeProps> = ({ chains }) => {
+  const theme = useTheme()
   const [filter, setFilter] = useState<Chain[]>(chains)
   const t = useLocale()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
 
   const searchNetwork: FormEventHandler<HTMLInputElement> = e => {
     const searchContent = (e.target as HTMLInputElement).value.trim()
@@ -46,21 +58,18 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
   }
 
   return (
-    <>
-      <GithubCorner />
-      <div className="chainlist">
-        <Page>
-          <Page.Header>
-            <h2>{t('AppName')}</h2>
-            <p>{t('AppDesc')}</p>
-          </Page.Header>
+    <Provider client={client}>
+      <Header />
+      <div className="layout">
+        <main>
+          <p className="desc">{t('AppDesc')}</p>
           <Input
             width="100%"
             placeholder={t('SearchPlaceholder')}
             icon={<Search />}
             onChange={onSearch}
             clearable
-          />
+            enterKeyHint="search" />
           <Divider />
 
           <Grid.Container gap={2} className="network__container">
@@ -70,9 +79,32 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
               </Grid>
             ))}
           </Grid.Container>
-        </Page>
+        </main>
       </div>
-    </>
+      <BackToTop />
+      <style jsx>{`
+        .desc {
+          margin-top: 100px;
+        }
+
+        .layout {
+          max-width: ${theme.layout.pageWidthWithMargin};
+          margin: 0 auto;
+          padding: 0 ${theme.layout.gap} calc(${theme.layout.gap} * 2);
+          box-sizing: border-box;
+        }
+        @media only screen and (max-width: ${theme.layout.breakpointMobile}) {
+          .layout {
+            width: 90vw;
+            max-width: 90vw;
+            padding: 20px 0;
+          }
+          .desc {
+            margin-top: 70px;
+          }
+        }
+      `}</style>
+    </Provider>
   )
 }
 

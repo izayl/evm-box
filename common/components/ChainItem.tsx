@@ -1,4 +1,4 @@
-import { Fieldset, Tag, Row, Col, Button } from '@geist-ui/react'
+import { Fieldset, Grid, Button } from '@geist-ui/react'
 import classnames from 'classnames'
 import { useChain } from '../hooks/useChain'
 import { useDApp } from '../hooks/useDApp'
@@ -10,10 +10,8 @@ interface IChainItemProps {
 
 export const ChainItem: React.FC<IChainItemProps> = ({ chain }) => {
   const enable = useDApp()
-  const [currentChainId, addEthChain] = useChain()
+  const [currentChainId, switchEthChain] = useChain()
   const t = useLocale()
-  const networkLabel =
-    chain.faucets && chain.faucets.length ? 'Testnet' : 'Mainnet'
 
   return (
     <>
@@ -24,48 +22,57 @@ export const ChainItem: React.FC<IChainItemProps> = ({ chain }) => {
       >
         <Fieldset.Title className="chain-title">
           {/* {chain.nativeCurrency?.symbol ?? ''} */}
-          {chain.chain}
-          <Tag type="lite" className="chain-tag">
-            {networkLabel}
-          </Tag>
+          {chain.name}
         </Fieldset.Title>
         <Fieldset.Subtitle>
-          <Row>
-            <Col>
-              <p style={{ whiteSpace: 'nowrap' }}>{chain.name}</p>
-            </Col>
+          <Grid.Container justify="space-between">
+            <Grid>
+              <p style={{ whiteSpace: 'nowrap' }}>{chain.chain}</p>
+            </Grid>
 
-            <Col>
+            <Grid>
               <p style={{ textAlign: 'right' }}>chainId: {chain.chainId}</p>
-            </Col>
-          </Row>
+            </Grid>
+          </Grid.Container>
         </Fieldset.Subtitle>
         <Fieldset.Footer>
-          <Fieldset.Footer.Status>
-            <a href={chain.infoURL} target="_blank" rel="noopener noreferrer">
-              {t('OfficialSite')}
-            </a>
-          </Fieldset.Footer.Status>
-          <Fieldset.Footer.Actions>
+          <div className="status">
+            <Grid.Container gap={2}>
+              <Grid>
+                <a href={chain.infoURL} target="_blank" rel="noopener noreferrer">
+                  {t('OfficialSite')}
+                </a>
+              </Grid>
+              {
+                chain.faucets.slice(0, 2).map((faucet) => <Grid key={faucet}><a href={faucet} target="_blank" rel="noopener noreferrer"> {t('Faucet')} </a></Grid>)
+              }
+            </Grid.Container>
+          </div>
+          <div className="actions">
             {currentChainId === chain.chainId
-              ? 'current network'
+              ? t('CurrentNetwork')
               : enable && (
                 <Button
                   type="secondary"
                   ghost
-                  size="mini"
-                  onClick={() => addEthChain(chain)}
+                  scale={0.35}
+                  onClick={() => switchEthChain(chain)}
                 >
-                  {t('Add')}
+                  {t('Switch')}
                 </Button>
               )}
-          </Fieldset.Footer.Actions>
+          </div>
         </Fieldset.Footer>
       </Fieldset>
       <style jsx>
         {`
           :global(.chain) {
-            width: 100%;
+            display: block;
+            width: 100% !important;
+          }
+
+          :global(.chain:hover) {
+            box-shadow: 0 5px 10px rgb(0 0 0 / 12%);
           }
 
           :global(.current .content) {
@@ -76,6 +83,20 @@ export const ChainItem: React.FC<IChainItemProps> = ({ chain }) => {
           }
           :global(.chain-tag) {
             margin-left: auto;
+          }
+          .status {
+            font-size: 0.875rem;
+            line-height: 1.2;
+            margin: 0;
+            display: inline-flex;
+            word-break: break-word;
+          }
+          .status > :global(p) {
+            margin: 0;
+          }
+          .actions {
+            display: flex;
+            justify-content: flex-end;
           }
         `}
       </style>
