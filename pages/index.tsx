@@ -12,6 +12,7 @@ import { mergeNetworkConfig } from '../common/utils'
 import { useLocale } from '../common/hooks/useLocale'
 import Header from '../common/components/Header'
 import { client } from '../common/connectors/client'
+import BackToTop from '../common/components/BackToTop'
 interface HomeProps {
   chains: Chain[]
 }
@@ -80,6 +81,7 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
           </Grid.Container>
         </main>
       </div>
+      <BackToTop />
       <style jsx>{`
         .desc {
           margin-top: 100px;
@@ -91,6 +93,7 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
           padding: 0 ${theme.layout.gap} calc(${theme.layout.gap} * 2);
           box-sizing: border-box;
         }
+
         @media only screen and (max-width: ${theme.layout.breakpointMobile}) {
           .layout {
             width: 90vw;
