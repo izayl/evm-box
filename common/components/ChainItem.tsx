@@ -37,9 +37,16 @@ export const ChainItem: React.FC<IChainItemProps> = ({ chain }) => {
         </Fieldset.Subtitle>
         <Fieldset.Footer>
           <div className="status">
-            <a href={chain.infoURL} target="_blank" rel="noopener noreferrer">
-              {t('OfficialSite')}
-            </a>
+            <Grid.Container gap={2}>
+              <Grid>
+                <a href={chain.infoURL} target="_blank" rel="noopener noreferrer">
+                  {t('OfficialSite')}
+                </a>
+              </Grid>
+              {
+                chain.faucets.slice(0, 2).map((faucet) => <Grid key={faucet}><a href={faucet} target="_blank" rel="noopener noreferrer"> {t('Faucet')} </a></Grid>)
+              }
+            </Grid.Container>
           </div>
           <div className="actions">
             {currentChainId === chain.chainId
