@@ -56,7 +56,6 @@ const Header: React.FC = () => {
   const t = useLocale()
   const theme = useTheme()
   const { switchTheme, themeType } = useThemeSwitch()
-
   return (
     <header>
       <div className="header">

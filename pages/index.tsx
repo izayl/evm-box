@@ -93,7 +93,6 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
           padding: 0 ${theme.layout.gap} calc(${theme.layout.gap} * 2);
           box-sizing: border-box;
         }
-
         @media only screen and (max-width: ${theme.layout.breakpointMobile}) {
           .layout {
             width: 90vw;
