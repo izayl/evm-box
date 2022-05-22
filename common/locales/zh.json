@@ -6,5 +6,6 @@
   "Add": "添加",
   "Switch": "切换到此网络",
   "disconnect": "断开连接",
-  "CurrentNetwork": "当前网络"
+  "CurrentNetwork": "当前网络",
+  "Faucet": "领取测试代币"
 }
