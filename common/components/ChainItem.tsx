@@ -1,4 +1,4 @@
-import { Fieldset, Grid, Button } from '@geist-ui/react'
+import { Fieldset, Grid, Button, useTheme } from '@geist-ui/react'
 import classnames from 'classnames'
 import { useChain } from '../hooks/useChain'
 import { useDApp } from '../hooks/useDApp'
@@ -10,6 +10,7 @@ interface IChainItemProps {
 
 export const ChainItem: React.FC<IChainItemProps> = ({ chain }) => {
   const enable = useDApp()
+  const theme = useTheme()
   const [currentChainId, switchEthChain] = useChain()
   const t = useLocale()
 
@@ -77,6 +78,7 @@ export const ChainItem: React.FC<IChainItemProps> = ({ chain }) => {
 
           :global(.current .content) {
             background: antiquewhite;
+            color: ${theme.palette.accents_1}
           }
           :global(.chain-title) {
             display: flex !important;
