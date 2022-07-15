@@ -1,4 +1,10 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "cSpell.words": ["chainlist", "wagmi"]
+  "cSpell.words": [
+    "chainlist",
+    "wagmi"
+  ],
+  "i18n-ally.localesPaths": [
+    "common/locales"
+  ]
 }
