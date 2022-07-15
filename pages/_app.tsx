@@ -41,6 +41,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
             />
             <meta property="og:title" content="EVM Box" />
             <meta property="og:description" content={t('AppDesc')} />
+            <meta name="google-site-verification" content="aRVvcWYD39LeQ16swsN4aEXrOdrO2u2yegnNfoQeTVs" />
             {/* Global Site Tag (gtag.js) - Google Analytics */}
             <Script
               strategy="afterInteractive"
