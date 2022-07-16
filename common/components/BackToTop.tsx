@@ -36,7 +36,7 @@ const BackToTop = () => {
 
   return <>
     <div className={`to-top ${show ? 'show' : 'hide'}`}>
-      <Button className="to-top-btn" type="secondary" icon={<ArrowUp />} auto onClick={backToTop}>Top</Button>
+      <Button type="secondary" icon={<ArrowUp />} auto onClick={backToTop}>Top</Button>
     </div>
     <style jsx>{`
       .to-top {
@@ -47,12 +47,10 @@ const BackToTop = () => {
         z-index: 1;
         opacity: 0;
         transition: opacity 0.3s;
+        border-radius: 20px;
       }
       .to-top.show {
         opacity: 1;
-      }
-      :global(.to-top-btn) {
-        border-radius: 20px !important;
       }
     `}</style>
   </>
