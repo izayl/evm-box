@@ -69,12 +69,13 @@ export const Home: React.FC<HomeProps> = ({ chains }) => {
             icon={<Search />}
             onChange={onSearch}
             clearable
-            enterKeyHint="search" />
+            enterKeyHint="search"
+          />
           <Divider />
 
           <Grid.Container gap={2} className="network__container">
             {filter.map((chain: Chain) => (
-              <Grid sm={12} xs={24} key={chain.chainId}>
+              <Grid sm={12} xs={24} key={`${chain.name}:${chain.chainId}`}>
                 <ChainItem chain={chain} />
               </Grid>
             ))}
